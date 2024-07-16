@@ -1,8 +1,8 @@
 image_sources:
-- name: gardencam
+- name: kitchencam
   input_type: rtsp
   id: 
-      rtsp_url: rtsp://admin:{{CAMERA_PASSWORD}}@192.168.1.127:554
+      rtsp_url: rtsp://admin:{{CAMERA_PASSWORD}}@10.66.0.52:554
       # CAMERA_PASSWORD must be set as an environment variable
       # before running the app.
       # You can preview this with:

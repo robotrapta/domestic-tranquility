@@ -1,20 +1,7 @@
-# AI Garden Watcher
+# Domestic Tranqulity in the 21st century
 
-Uses [Computer Vision](https://pypi.org/project/groundlight/) to keep an automated
-eye on your garden.  If it detects any animals in the scene, it plays a sound of a barking dog
-through the loudspeaker to scare away the animals.
-
-## Motivation
-
-I'm trying to establish woodsorrel clovers as a beautiful groundcover.  But I'm having trouble getting them established.  Because deer keeping eating them.  So I set up a raspberry pi with a loudspeaker and a camera to bark at the deer.  It's all running on power-over-ethernet.
-
-[<img src="./media/needs-protecting.jpeg" alt="Woodsorrel needs protecting" height="220">](./media/needs-protecting.jpeg)
-[<img src="./media/the-enemy.jpeg" alt="The Enemy" height="220">](./media/the-enemy.jpeg)
-[<img src="./media/our-tool.jpeg" alt="Our tool" height="220">](./media/our-tool.jpeg)
-[<img src="./media/the-tech.jpeg" alt="Our tool" height="220">](./media/the-tech.jpeg)
-[<img src="./media/poe.jpeg" alt="Power over ethernet" height="220">](./media/poe.jpeg)
-[<img src="./media/the-whole-scene.jpeg" alt="The whole scene" height="220">](./media/the-whole-scene.jpeg)
-
+Uses [AI Vision](https://pypi.org/project/groundlight/) to insure the domestic tranquility
+by keeping an eye on how clean your kitchen is.
 
 # Setting up
 
@@ -23,6 +10,7 @@ I'm trying to establish woodsorrel clovers as a beautiful groundcover.  But I'm 
 ```
 pip3 install -r requirements.txt
 ```
+
 
 ## Camera configuration and preview
 
@@ -39,16 +27,20 @@ your terminal (if you have an advanced terminal program such as
 python3 trycamera.py
 ```
 
+## Stashing your secrets
 
-## Checking the sound
-
-Make sure the sound is working properly:
+Put your secrets in the file `.secret-env` that looks like:
 
 ```
-python3 dogsound.py
+export CAMERA_PASSWORD=rtsp-password...
+export GROUNDLIGHT_API_TOKEN=api_...
 ```
 
-If you'd like a different sound, just install a new `.mp3` file.
+Then before you run this code run:
+
+```
+source .secret-env
+```
 
 
 ## Groundlight account setup
@@ -72,5 +64,5 @@ You might want to edit the motion detection parameters to make it more or less s
 
 ## Hardware
 
-I used a Raspberry Pi 4 with a camera module.  It will work anywhere you have the right python
+I used a Raspberry Pi 4.  It will work anywhere you have the right python
 and libraries installed.  I used Groundlight's [pre-built Raspberry Pi image](https://github.com/groundlight/groundlight-pi-gen).

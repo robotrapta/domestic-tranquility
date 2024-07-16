@@ -5,4 +5,4 @@ __pycache__
 _local_config.json
 .DS_Store
 ._*
-
+.secret-env
