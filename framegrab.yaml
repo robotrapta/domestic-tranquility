@@ -1,18 +1,8 @@
 image_sources:
 - name: kitchencam
-  input_type: rtsp
-  id: 
-      rtsp_url: rtsp://admin:{{CAMERA_PASSWORD}}@10.66.0.52:554
-      # CAMERA_PASSWORD must be set as an environment variable
-      # before running the app.
-      # You can preview this with:
-      #   framegrab preview ./framegrab.yaml
+  id:
+    serial_number: '2020040501'
+  input_type: generic_usb
   options:
-      num_90_deg_rotations: 1
-      crop:
-        pixels:
-          top: 566
-          left: 410
-          bottom: 1266
-          right: 1080
+      num_90_deg_rotations: 3
 
