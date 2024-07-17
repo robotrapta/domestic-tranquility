@@ -7,19 +7,16 @@ from imgcat import imgcat
 import cv2
 import framegrab
 
-from dogsound import FakeDog
 
-
-class GardenWatcher():
+class KitchenWatcher():
 
     def __init__(self):
         self.camera = framegrab.FrameGrabber.from_yaml("./framegrab.yaml")[0]
         self.motdet = framegrab.MotionDetector(pct_threshold=3, val_threshold=50)
-        self.fake_dog = FakeDog()
         self.gl = Groundlight()
         self.detector = self.gl.get_or_create_detector(
-            name="deerbark",
-            query="Can you see any animals?"
+            name="counter-clear",
+            query="Are there any dirty dishes on the counter?",
         )
 
     def run(self):
@@ -40,11 +37,10 @@ class GardenWatcher():
             imgcat(img)
             img_query = self.gl.ask_ml(detector=self.detector, image=big_img)
             if img_query.result.label == "YES":
-                print(f"Animal detected at {now}! {img_query}")
-                self.fake_dog.alert()
+                print(f"Dirty dishes detected at {now}")
             else:
-                print(f"No animal found at {now}: {img_query}")
-        time.sleep(5)
+                print(f"No dirty dishes found at {now}")
+        time.sleep(60)
 
 if __name__ == "__main__":
-    GardenWatcher().run()
+    KitchenWatcher().run()

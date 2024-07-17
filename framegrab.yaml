@@ -7,4 +7,12 @@ image_sources:
       # before running the app.
       # You can preview this with:
       #   framegrab preview ./framegrab.yaml
+  options:
+      num_90_deg_rotations: 1
+      crop:
+        pixels:
+          top: 566
+          left: 410
+          bottom: 1266
+          right: 1080
 
