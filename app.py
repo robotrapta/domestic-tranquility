@@ -12,7 +12,7 @@ class KitchenWatcher():
 
     def __init__(self):
         self.camera = framegrab.FrameGrabber.from_yaml("./framegrab.yaml")[0]
-        self.motdet = framegrab.MotionDetector(pct_threshold=3, val_threshold=50)
+        self.motdet = framegrab.MotionDetector(pct_threshold=0.5, val_threshold=50)
         self.gl = Groundlight()
         self.detector = self.gl.get_or_create_detector(
             name="counter-clear",
@@ -20,8 +20,8 @@ class KitchenWatcher():
         )
         # Timing constants
         self.exception_backoff_s = 60
-        self.motion_interval_s = 60
-        self.no_motion_post_anyway_s = 3600
+        self.motion_interval_s = 30
+        self.no_motion_post_anyway_s = 7200
         self.last_motion_post = time.time() - self.no_motion_post_anyway_s
 
     def run(self):

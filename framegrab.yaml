@@ -1,8 +1,20 @@
 image_sources:
 - name: kitchencam
   id:
-    serial_number: '2020040501'
+    # Fixed focus
+    #serial_number: '2020040501'
+    # logitech
+    serial_number: F38C9B71
   input_type: generic_usb
   options:
       num_90_deg_rotations: 3
+      resolution:
+        height: 1080
+        width: 1920
+      crop: 
+        pixels:
+          top: 150
+          left: 750
+          bottom: 800
+          right: 1650
 
