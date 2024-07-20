@@ -8,6 +8,8 @@ from imgcat import imgcat
 import cv2
 import framegrab
 
+from noisy import VoiceAlerts
+
 
 class KitchenWatcher():
 
@@ -28,6 +30,9 @@ class KitchenWatcher():
         self.motion_interval_s = 30
         self.no_motion_post_anyway_s = 7200
         self.last_motion_post = time.time() - self.no_motion_post_anyway_s
+        # Outputs
+        self.noisy = VoiceAlerts(cooldown=300, message="Thank you for cleaning up!")
+        self.last_state = "CLEAN"
 
     def run(self):
 
@@ -54,8 +59,13 @@ class KitchenWatcher():
             img_query = self.gl.ask_ml(detector=self.detector, image=big_img)
             if img_query.result.label == "YES":
                 print(f"Dirty dishes detected at {now}")
+                self.last_state = "DIRTY"
             else:
                 print(f"No dirty dishes found at {now}")
+                if self.last_state == "DIRTY":
+                    # Woot we cleaned up!  Celebrate.
+                    self.noisy.alert()
+                self.last_state = "CLEAN"
         time.sleep(self.motion_interval_s)
 
 if __name__ == "__main__":

@@ -9,6 +9,7 @@ by keeping an eye on how clean your kitchen is.
 
 ```
 pip3 install -r requirements.txt
+sudo apt update && sudo apt install -y mpg321
 ```
 
 
@@ -66,3 +67,28 @@ You might want to edit the motion detection parameters to make it more or less s
 
 I used a Raspberry Pi 4.  It will work anywhere you have the right python
 and libraries installed.  I used Groundlight's [pre-built Raspberry Pi image](https://github.com/groundlight/groundlight-pi-gen).
+
+
+### Audio
+
+On Raspberry pi, alsa is what I've used.  You can check that it's working with:
+
+```
+speaker-test -t wav -c 2
+```
+
+Try editing your `/etc/asound.conf` file to set the correct device.  Then run:
+
+```
+sudo alsa force-reload
+```
+
+And set the environment variable so pygame uses it:
+
+```
+export SDL_AUDIODRIVER=alsa
+```
+
+You might want to add this to your `.secret-env` file so you don't have to keep
+setting it up.
+
