@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import time
 import traceback
 
@@ -14,10 +15,14 @@ class KitchenWatcher():
         self.camera = framegrab.FrameGrabber.from_yaml("./framegrab.yaml")[0]
         self.motdet = framegrab.MotionDetector(pct_threshold=0.5, val_threshold=50)
         self.gl = Groundlight()
-        self.detector = self.gl.get_or_create_detector(
-            name="counter-clear",
-            query="Are there any dirty dishes on the counter?",
-        )
+        if os.environ.get("DETECTOR_ID"):
+            self.detector = self.gl.get_detector(os.environ["DETECTOR_ID"])
+        else:
+            self.detector = self.gl.get_or_create_detector(
+                name="counter-clear",
+                query="Are there any dirty dishes on the counter?",
+            )
+        print(f"Using {self.detector}")
         # Timing constants
         self.exception_backoff_s = 60
         self.motion_interval_s = 30
