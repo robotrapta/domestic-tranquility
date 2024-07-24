@@ -60,7 +60,7 @@ class KitchenWatcher():
             if img_query.result.label == "YES":
                 print(f"Dirty dishes detected at {now}")
                 self.last_state = "DIRTY"
-            else:
+            elif img_query.result.label == "NO":
                 print(f"No dirty dishes found at {now}")
                 if self.last_state == "DIRTY":
                     # Woot we cleaned up!  Celebrate.
